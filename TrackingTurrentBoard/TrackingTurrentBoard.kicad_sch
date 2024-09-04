@@ -1,0 +1,22 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (uuid 646d2382-5207-4eb7-a10d-a00ee180c70e)
+
+  (paper "A3")
+
+  (title_block
+    (title "Tracking Turrent Board")
+    (date "2024-09-04")
+    (rev "A")
+    (company "ECE 395")
+    (comment 4 "Engineers: Quinn Athas, Aidan Costello")
+  )
+
+  (lib_symbols
+  )
+
+
+  (sheet_instances
+    (path "/" (page "1"))
+  )
+)
