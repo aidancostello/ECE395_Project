@@ -326,6 +326,22 @@
     [
       "646d2382-5207-4eb7-a10d-a00ee180c70e",
       ""
+    ],
+    [
+      "171dace7-42c0-4c25-85c8-a6f9b635174f",
+      "Power"
+    ],
+    [
+      "b2f761ea-6e38-4f1a-844c-c3ae4a5735d8",
+      "GPS"
+    ],
+    [
+      "c40d31cf-9a13-4ba0-b21b-a8acf30ea144",
+      "Motors"
+    ],
+    [
+      "489c9a87-e58e-402a-a817-92d1226bc968",
+      "Connectors"
     ]
   ],
   "text_variables": {}
