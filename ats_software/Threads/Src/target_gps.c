@@ -1,7 +1,9 @@
 #include "target_gps.h"
 
 void target_gps_init() {
-	// TODO: init uart for target gps
+	// set RTS and CTS pins low as they are unused
+	HAL_GPIO_WritePin(UART_RTS_BANK, UART_RTS_PIN, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(UART_CTS_BANK, UART_CTS_PIN, GPIO_PIN_RESET);
 	return;
 }
 
