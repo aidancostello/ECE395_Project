@@ -73,13 +73,13 @@ Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c \
 Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c \
 Core/Src/sysmem.c \
 Core/Src/syscalls.c \
-Core/Src/servo.c \
-Core/Src/stepper.c \
-Core/Src/calculate.c \
-Core/Src/self_gps.c \
-Core/Src/target_gps.c \
-Core/Src/encoder.c \
-Core/Src/MAX_M8C.c
+Threads/Src/calculate.c \
+Threads/Src/encoder.c \
+Threads/Src/self_gps.c \
+Threads/Src/servo.c \
+Threads/Src/stepper.c \
+Threads/Src/target_gps.c \
+Drivers/MAX_M8C/Src/MAX_M8C.c
 
 # ASM sources
 ASM_SOURCES =  \
@@ -147,7 +147,9 @@ C_INCLUDES =  \
 -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 \
 -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F \
 -IDrivers/CMSIS/Device/ST/STM32L4xx/Include \
--IDrivers/CMSIS/Include
+-IDrivers/CMSIS/Include \
+-IThreads/Inc \
+-IDrivers/MAX_M8C/Inc
 
 
 # compile gcc flags
