@@ -27,6 +27,9 @@ void calculate_update(struct GpsData* gps_data, struct TargetPosition* target_po
 	elevation_angle = elevation_angle > 90 ? 90 : elevation_angle;
 	elevation_angle = elevation_angle < 0 ? 0 : elevation_angle;
 
+	// make rotation angle always positive
+	rotation_angle = rotation_angle < 0 ? rotation_angle + 360 : rotation_angle;
+
 	// write target position data
 	osMutexAcquire(target_position->mtx, 0);
 	target_position->rotation_angle = rotation_angle;

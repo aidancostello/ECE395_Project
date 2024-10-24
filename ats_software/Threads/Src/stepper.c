@@ -38,11 +38,17 @@ void stepper_update(struct EncoderPosition* encoder_position, struct TargetPosit
 		angle_diff *= -1;
 	}
 
+	// check opposite direction
+	if (angle_diff > 180) {
+        angle_diff = 360-angle_diff;
+        dir = dir ^ (0x01);
+	}
+
 	// determine largest step possible
 	uint16_t divisor = 1;
 	uint8_t mode_bits = 0;
 	for (; mode_bits < MICROSTEP_UPPER_BOUND; mode_bits++) {
-		if ((double)DEGREES_PER_STEP/divisor < angle_diff) {
+		if ((double)DEGREES_PER_STEP/divisor <= angle_diff) {
 			break;
 		}
 		divisor *= 2;
@@ -61,11 +67,15 @@ void stepper_update(struct EncoderPosition* encoder_position, struct TargetPosit
 	HAL_GPIO_WritePin(STEPPER_MODE3_BANK, STEPPER_MODE3_PIN, (mode_bits&0x4)>>2);
 	//execute step
 	HAL_GPIO_WritePin(STEPPER_STCK_BANK, STEPPER_STCK_PIN, GPIO_PIN_SET);
-	HAL_Delay(10);
+	osDelay(1);
 	HAL_GPIO_WritePin(STEPPER_STCK_BANK, STEPPER_STCK_PIN, GPIO_PIN_RESET);
 
 	// update current angle
 	current_angle = dir ? current_angle + (double)DEGREES_PER_STEP/divisor : current_angle - (double)DEGREES_PER_STEP/divisor;
+
+	// constrain current angle to range [0, 359)
+	current_angle = current_angle >= 360 ? current_angle-360 : current_angle;
+	current_angle = current_angle < 0 ? current_angle+360 : current_angle;
 
 	return;
 }

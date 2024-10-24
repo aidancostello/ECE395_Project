@@ -3,7 +3,7 @@
 uint8_t max_m8c_init(I2C_HandleTypeDef* i2c_handle, GPIO_TypeDef* reset_bank, uint16_t reset) {
 	// toggle reset
 	HAL_GPIO_WritePin(reset_bank, reset, GPIO_PIN_RESET);
-	HAL_Delay(10);
+	HAL_Delay(1);
 	HAL_GPIO_WritePin(reset_bank, reset, GPIO_PIN_SET);
 
 	return MAX_M8C_SUCCESS;
