@@ -580,7 +580,7 @@ void task_entry_TargetGps(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    target_gps_update(((struct DataPointers*)argument)->gps_data);
+    target_gps_update(&huart3, ((struct DataPointers*)argument)->gps_data);
     osDelay(10);
   }
   /* USER CODE END task_entry_TargetGps */
