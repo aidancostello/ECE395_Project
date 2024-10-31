@@ -1,0 +1,7 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "MotorLib")(type "KiCad")(uri "${KIPRJMOD}/MotorLib.kicad_sym")(options "")(descr ""))
+  (lib (name "Connectors_RF")(type "KiCad")(uri "${KIPRJMOD}/Connectors_RF.kicad_sym")(options "")(descr ""))
+  (lib (name "buzzer")(type "KiCad")(uri "${KIPRJMOD}/buzzer.kicad_sym")(options "")(descr ""))
+  (lib (name "USB_Con")(type "KiCad")(uri "${KIPRJMOD}/USB_Con.kicad_sym")(options "")(descr ""))
+)
