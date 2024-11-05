@@ -9,6 +9,6 @@
 
 void target_gps_init();
 
-void target_gps_update(UART_HandleTypeDef* uart_handle, struct GpsData* gps_data);
+void target_gps_update(UART_HandleTypeDef* uart_handle, osMutexId_t* uart_mutex_handle, struct GpsData* gps_data);
 
 #endif

@@ -7,13 +7,16 @@ void target_gps_init() {
 	return;
 }
 
-void target_gps_update(UART_HandleTypeDef* uart_handle, struct GpsData* gps_data) {
+void target_gps_update(UART_HandleTypeDef* uart_handle, osMutexId_t* uart_mutex_handle, struct GpsData* gps_data) {
 	// read data
 	// TODO: implement interrupt receive
 	uint8_t buf[12];
+	osMutexAcquire(*uart_mutex_handle, 1000);
 	if (HAL_UART_Receive(uart_handle, buf, 12, 100) != HAL_OK) {
+		osMutexRelease(*uart_mutex_handle);
 		return;
 	}
+	osMutexRelease(*uart_mutex_handle);
 
 	// little endian
 	int32_t target_lat = (buf[3]<<24) | (buf[2]<<16) | (buf[1]<<8) | buf[0];
