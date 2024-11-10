@@ -33,6 +33,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 typedef StaticTask_t osStaticThreadDef_t;
+typedef StaticQueue_t osStaticMessageQDef_t;
 typedef StaticSemaphore_t osStaticMutexDef_t;
 /* USER CODE BEGIN PTD */
 
@@ -54,6 +55,7 @@ I2C_HandleTypeDef hi2c1;
 TIM_HandleTypeDef htim2;
 
 UART_HandleTypeDef huart3;
+DMA_HandleTypeDef hdma_usart3_rx;
 
 /* Definitions for task_SelfGps */
 osThreadId_t task_SelfGpsHandle;
@@ -127,6 +129,17 @@ const osThreadAttr_t task_Servo_attributes = {
   .stack_size = sizeof(task_ServoBuffer),
   .priority = (osPriority_t) osPriorityNormal,
 };
+/* Definitions for targetGpsQueue */
+osMessageQueueId_t targetGpsQueueHandle;
+uint8_t targetGpsQueueBuffer[ 8 * sizeof( struct TargetGpsDataRaw ) ];
+osStaticMessageQDef_t targetGpsQueueControlBlock;
+const osMessageQueueAttr_t targetGpsQueue_attributes = {
+  .name = "targetGpsQueue",
+  .cb_mem = &targetGpsQueueControlBlock,
+  .cb_size = sizeof(targetGpsQueueControlBlock),
+  .mq_mem = &targetGpsQueueBuffer,
+  .mq_size = sizeof(targetGpsQueueBuffer)
+};
 /* Definitions for uartMutex */
 osMutexId_t uartMutexHandle;
 osStaticMutexDef_t uartMutexControlBlock;
@@ -161,11 +174,14 @@ const osMutexAttr_t encoderPositionMutex_attributes = {
 };
 /* USER CODE BEGIN PV */
 
+uint8_t uart_rx_buf[24];
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_USART3_UART_Init(void);
@@ -214,6 +230,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_I2C1_Init();
   MX_TIM2_Init();
   MX_USART3_UART_Init();
@@ -251,6 +268,10 @@ int main(void)
   /* start timers, add new ones, ... */
   /* USER CODE END RTOS_TIMERS */
 
+  /* Create the queue(s) */
+  /* creation of targetGpsQueue */
+  targetGpsQueueHandle = osMessageQueueNew (8, sizeof(struct TargetGpsDataRaw), &targetGpsQueue_attributes);
+
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
   /* USER CODE END RTOS_QUEUES */
@@ -279,7 +300,7 @@ int main(void)
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */
-  /* add events, ... */
+  HAL_UART_Receive_DMA(&huart3, uart_rx_buf, 24);
   /* USER CODE END RTOS_EVENTS */
 
   /* Start scheduler */
@@ -475,6 +496,22 @@ static void MX_USART3_UART_Init(void)
 }
 
 /**
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void)
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA1_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA1_Channel3_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel3_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel3_IRQn);
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -560,7 +597,13 @@ void task_entry_SelfGps(void *argument)
   /* Infinite loop */
   for(;;)
   {
+    // osMutexAcquire(uartMutexHandle, 1000);
+    // char* msg = "task 1\n";
+    // HAL_UART_Transmit(&huart3, (uint8_t*)msg, 7, 1000);
+    // osMutexRelease(uartMutexHandle);
+
     self_gps_update(&hi2c1, ((struct DataPointers*)argument)->gps_data);
+
     osDelay(10);
   }
   /* USER CODE END 5 */
@@ -580,7 +623,13 @@ void task_entry_TargetGps(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    target_gps_update(&huart3, ((struct DataPointers*)argument)->gps_data);
+    // osMutexAcquire(uartMutexHandle, 1000);
+    // char* msg = "task 2\n";
+    // HAL_UART_Transmit(&huart3, (uint8_t*)msg, 7, 1000);
+    // osMutexRelease(uartMutexHandle);
+
+    target_gps_update(&targetGpsQueueHandle, ((struct DataPointers*)argument)->gps_data);
+
     osDelay(10);
   }
   /* USER CODE END task_entry_TargetGps */
@@ -599,7 +648,13 @@ void task_entry_Calculate(void *argument)
   /* Infinite loop */
   for(;;)
   {
+    // osMutexAcquire(uartMutexHandle, 1000);
+    // char* msg = "task 3\n";
+    // HAL_UART_Transmit(&huart3, (uint8_t*)msg, 7, 1000);
+    // osMutexRelease(uartMutexHandle);
+
     calculate_update(((struct DataPointers*)argument)->gps_data, ((struct DataPointers*)argument)->target_position);
+
     osDelay(10);
   }
   /* USER CODE END task_entry_Calculate */
@@ -619,7 +674,13 @@ void task_entry_Encoder(void *argument)
   /* Infinite loop */
   for(;;)
   {
+    // osMutexAcquire(uartMutexHandle, 1000);
+    // char* msg = "task 4\n";
+    // HAL_UART_Transmit(&huart3, (uint8_t*)msg, 7, 1000);
+    // osMutexRelease(uartMutexHandle);
+
     encoder_update(((struct DataPointers*)argument)->encoder_position);
+
     osDelay(10);
   }
   /* USER CODE END task_entry_Encoder */
@@ -639,7 +700,13 @@ void task_entry_Stepper(void *argument)
   /* Infinite loop */
   for(;;)
   {
+    // osMutexAcquire(uartMutexHandle, 1000);
+    // char* msg = "task 5\n";
+    // HAL_UART_Transmit(&huart3, (uint8_t*)msg, 7, 1000);
+    // osMutexRelease(uartMutexHandle);
+
     stepper_update(((struct DataPointers*)argument)->encoder_position, ((struct DataPointers*)argument)->target_position);
+
     osDelay(10);
   }
   /* USER CODE END task_entry_Stepper */
@@ -659,10 +726,33 @@ void task_entry_Servo(void *argument)
   /* Infinite loop */
   for(;;)
   {
+    // osMutexAcquire(uartMutexHandle, 1000);
+    // char* msg = "task 6\n";
+    // HAL_UART_Transmit(&huart3, (uint8_t*)msg, 7, 1000);
+    // osMutexRelease(uartMutexHandle);
+
     servo_update(&htim2, ((struct DataPointers*)argument)->target_position);
+
     osDelay(10);
   }
   /* USER CODE END task_entry_Servo */
+}
+
+// once received 24 bytes, remove from buffer and put into queue
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+  struct TargetGpsDataRaw data_packet;
+
+  // fill data
+  memcpy(&data_packet.target_lat, uart_rx_buf, 8);
+  memcpy(&data_packet.target_lon, uart_rx_buf+8, 8);
+  memcpy(&data_packet.target_alt, uart_rx_buf+16, 8);
+
+  // reset rx buf
+  memset(uart_rx_buf, 0, 24);
+
+  // place data in queue
+  osMessageQueuePut(targetGpsQueueHandle, &data_packet, 0, 0);
 }
 
 /**

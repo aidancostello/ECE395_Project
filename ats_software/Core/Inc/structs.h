@@ -3,13 +3,19 @@
 
 #include "cmsis_os.h"
 
+struct TargetGpsDataRaw {
+	int64_t target_lat;
+	int64_t target_lon;
+	int64_t target_alt;
+};
+
 struct GpsData {
-	int32_t self_lat;
-	int32_t self_lon;
-	int32_t self_alt;
-	int32_t target_lat;
-	int32_t target_lon;
-	int32_t target_alt;
+	float self_lat;
+	float self_lon;
+	float self_alt;
+	float target_lat;
+	float target_lon;
+	float target_alt;
 	osMutexId_t* mtx;
 };
 

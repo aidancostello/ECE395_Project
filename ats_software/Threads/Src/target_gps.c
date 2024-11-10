@@ -7,27 +7,23 @@ void target_gps_init() {
 	return;
 }
 
-void target_gps_update(UART_HandleTypeDef* uart_handle, osMutexId_t* uart_mutex_handle, struct GpsData* gps_data) {
-	// read data
-	// TODO: implement interrupt receive
-	uint8_t buf[12];
-	osMutexAcquire(*uart_mutex_handle, 1000);
-	if (HAL_UART_Receive(uart_handle, buf, 12, 100) != HAL_OK) {
-		osMutexRelease(*uart_mutex_handle);
+void target_gps_update(osMessageQueueId_t* uart_queue, struct GpsData* gps_data) {
+	// early return if queue is empty
+	if (osMessageQueueGetCount(*uart_queue) == 0) {
 		return;
 	}
-	osMutexRelease(*uart_mutex_handle);
 
-	// little endian
-	int32_t target_lat = (buf[3]<<24) | (buf[2]<<16) | (buf[1]<<8) | buf[0];
-	int32_t target_lon = (buf[7]<<24) | (buf[6]<<16) | (buf[5]<<8) | buf[4];
-	int32_t target_alt = (buf[11]<<24) | (buf[10]<<16) | (buf[9]<<8) | buf[8];
+	// get data from queue
+	struct TargetGpsDataRaw temp;
+	if (osMessageQueueGet(*uart_queue, &temp, NULL, 0) != osOK) {
+		return;
+	}
 
 	// update self gps data
 	osMutexAcquire(gps_data->mtx, 0);
-	gps_data->target_lat = target_lat/(double)SCALAR;
-	gps_data->target_lon = target_lon/(double)SCALAR;
-	gps_data->target_alt = target_alt/(double)SCALAR;
+	gps_data->target_lat = temp.target_lat / SCALAR;
+	gps_data->target_lon = temp.target_lon / SCALAR;
+	gps_data->target_alt = temp.target_alt / SCALAR;
 	osMutexRelease(gps_data->mtx);
 
 	return;
