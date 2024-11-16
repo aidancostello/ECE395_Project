@@ -9,9 +9,6 @@ void calculate_update(struct GpsData* gps_data, struct TargetPosition* target_po
 	double target_lat = TO_RADIANS(gps_data->target_lat);
 	double target_lon = TO_RADIANS(gps_data->target_lon);
 	double target_alt = gps_data->target_alt;
-	// double target_lat = 40.115;
-	// double target_lon = -88.227778;
-	// double target_alt = 1000;
 	osMutexRelease(*(gps_data->mtx));
 
 	double delta_lon = target_lon-self_lon;
