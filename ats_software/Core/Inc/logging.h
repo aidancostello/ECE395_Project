@@ -15,7 +15,7 @@ void log_init(UART_HandleTypeDef* uart_handle, osMutexId_t* uart_mtx);
 // wrapper around uart transmit, logs a buffer
 HAL_StatusTypeDef log_transmit_buf(char* buf, size_t len);
 
-// logs a double
-HAL_StatusTypeDef log_transmit_double(double val, uint8_t precision, uint8_t newline);
+// logs a double, append is character to append on the end, 0 if no append
+HAL_StatusTypeDef log_transmit_double(double val, uint8_t precision, char append);
 
 #endif

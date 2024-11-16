@@ -22,14 +22,14 @@ HAL_StatusTypeDef log_transmit_buf(char* buf, size_t len) {
     return status;
 }
 
-HAL_StatusTypeDef log_transmit_double(double val, uint8_t precision, uint8_t newline) {
+HAL_StatusTypeDef log_transmit_double(double val, uint8_t precision, char append) {
     if (m_uart_handle == NULL || m_uart_mtx == NULL) { return HAL_ERROR; }
 
     char buf[DOUBLE_BUF_SIZE];
     uint8_t buf_len = double_to_string(val, precision, buf);
 
-    if (newline) {
-        buf[buf_len] = '\n';
+    if (append != 0) {
+        buf[buf_len] = append;
         buf_len++;
     }
 
