@@ -2,14 +2,17 @@
 
 void calculate_update(struct GpsData* gps_data, struct TargetPosition* target_position) {
 	// copy out gps data
-	osMutexAcquire(gps_data->mtx, 0);
+	osMutexAcquire(*(gps_data->mtx), portMAX_DELAY);
 	double self_lat = TO_RADIANS(gps_data->self_lat);
 	double self_lon = TO_RADIANS(gps_data->self_lon);
 	double self_alt = gps_data->self_alt;
 	double target_lat = TO_RADIANS(gps_data->target_lat);
 	double target_lon = TO_RADIANS(gps_data->target_lon);
 	double target_alt = gps_data->target_alt;
-	osMutexRelease(gps_data->mtx);
+	// double target_lat = 40.115;
+	// double target_lon = -88.227778;
+	// double target_alt = 1000;
+	osMutexRelease(*(gps_data->mtx));
 
 	double delta_lon = target_lon-self_lon;
 	double delta_lat = target_lat-self_lat;
@@ -31,10 +34,10 @@ void calculate_update(struct GpsData* gps_data, struct TargetPosition* target_po
 	rotation_angle = rotation_angle < 0 ? rotation_angle + 360 : rotation_angle;
 
 	// write target position data
-	osMutexAcquire(target_position->mtx, 0);
+	osMutexAcquire(*(target_position->mtx), portMAX_DELAY);
 	target_position->rotation_angle = rotation_angle;
 	target_position->elevation_angle = elevation_angle;
-	osMutexRelease(target_position->mtx);
+	osMutexRelease(*(target_position->mtx));
 
 	return;
 }

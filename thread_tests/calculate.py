@@ -32,8 +32,8 @@ def compute_angles(self_gps, target_gps):
     return rotation_angle, elevation_angle
 
 def main():
-    self_gps = (38.27269,-84.94623, 0)
-    target_gps = (34.5591396, -87.9065571, 1000)
+    self_gps = (40.115, -88.227778, 228.6)
+    target_gps = (40.115, -88.227778, 1000)
 
     rotation, elevation = compute_angles(self_gps, target_gps)
     print(f"rotation angle: {rotation}  elevation angle: {elevation}")

@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "structs.h"
+#include "logging.h"
 #include "self_gps.h"
 #include "target_gps.h"
 #include "calculate.h"
@@ -176,6 +177,11 @@ const osMutexAttr_t encoderPositionMutex_attributes = {
 
 uint8_t uart_rx_buf[24];
 
+struct GpsData gps_data;
+struct TargetPosition target_position;
+struct EncoderPosition encoder_position;
+struct DataPointers data_pointers;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -254,10 +260,32 @@ int main(void)
   encoderPositionMutexHandle = osMutexNew(&encoderPositionMutex_attributes);
 
   /* USER CODE BEGIN RTOS_MUTEX */
-  struct GpsData gps_data = {0, 0, 0, 0, 0, 0, &gpsDataMutexHandle};
-  struct TargetPosition target_position = {0, 0, &targetPositionMutexHandle};
-  struct EncoderPosition encoder_position = {0, &encoderPositionMutexHandle};
-  struct DataPointers data_pointers = {&gps_data, &target_position, &encoder_position};
+  
+  // fill gps data struct
+  gps_data.self_lat = 0;
+  gps_data.self_lon = 0;
+  gps_data.self_alt = 0;
+  gps_data.target_lat = 0;
+  gps_data.target_lon = 0;
+  gps_data.target_alt = 0;
+  gps_data.mtx = &gpsDataMutexHandle;
+
+  // fill target position struct
+  target_position.elevation_angle = 0;
+  target_position.rotation_angle = 0;
+  target_position.mtx = &targetPositionMutexHandle;
+
+  // fill encoder position struct
+  encoder_position.rotation_angle = 0;
+  encoder_position.mtx = &encoderPositionMutexHandle;
+
+  // fill data pointers struct
+  data_pointers.gps_data = &gps_data;
+  data_pointers.target_position = &target_position;
+  data_pointers.encoder_position = &encoder_position;
+
+  log_init(&huart3, &uartMutexHandle);
+
   /* USER CODE END RTOS_MUTEX */
 
   /* USER CODE BEGIN RTOS_SEMAPHORES */
@@ -597,10 +625,8 @@ void task_entry_SelfGps(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    // osMutexAcquire(uartMutexHandle, 1000);
     // char* msg = "task 1\n";
-    // HAL_UART_Transmit(&huart3, (uint8_t*)msg, 7, 1000);
-    // osMutexRelease(uartMutexHandle);
+    // log_transmit_buf(msg, 7);
 
     self_gps_update(&hi2c1, ((struct DataPointers*)argument)->gps_data);
 
@@ -623,10 +649,8 @@ void task_entry_TargetGps(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    // osMutexAcquire(uartMutexHandle, 1000);
     // char* msg = "task 2\n";
-    // HAL_UART_Transmit(&huart3, (uint8_t*)msg, 7, 1000);
-    // osMutexRelease(uartMutexHandle);
+    // log_transmit_buf(msg, 7);
 
     target_gps_update(&targetGpsQueueHandle, ((struct DataPointers*)argument)->gps_data);
 
@@ -648,10 +672,8 @@ void task_entry_Calculate(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    // osMutexAcquire(uartMutexHandle, 1000);
     // char* msg = "task 3\n";
-    // HAL_UART_Transmit(&huart3, (uint8_t*)msg, 7, 1000);
-    // osMutexRelease(uartMutexHandle);
+    // log_transmit_buf(msg, 7);
 
     calculate_update(((struct DataPointers*)argument)->gps_data, ((struct DataPointers*)argument)->target_position);
 
@@ -674,10 +696,8 @@ void task_entry_Encoder(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    // osMutexAcquire(uartMutexHandle, 1000);
     // char* msg = "task 4\n";
-    // HAL_UART_Transmit(&huart3, (uint8_t*)msg, 7, 1000);
-    // osMutexRelease(uartMutexHandle);
+    // log_transmit_buf(msg, 7);
 
     encoder_update(((struct DataPointers*)argument)->encoder_position);
 
@@ -700,10 +720,8 @@ void task_entry_Stepper(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    // osMutexAcquire(uartMutexHandle, 1000);
     // char* msg = "task 5\n";
-    // HAL_UART_Transmit(&huart3, (uint8_t*)msg, 7, 1000);
-    // osMutexRelease(uartMutexHandle);
+    // log_transmit_buf(msg, 7);
 
     stepper_update(((struct DataPointers*)argument)->encoder_position, ((struct DataPointers*)argument)->target_position);
 
@@ -726,10 +744,8 @@ void task_entry_Servo(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    // osMutexAcquire(uartMutexHandle, 1000);
     // char* msg = "task 6\n";
-    // HAL_UART_Transmit(&huart3, (uint8_t*)msg, 7, 1000);
-    // osMutexRelease(uartMutexHandle);
+    // log_transmit_buf(msg, 7);
 
     servo_update(&htim2, ((struct DataPointers*)argument)->target_position);
 

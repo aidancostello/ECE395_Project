@@ -25,9 +25,9 @@ void stepper_update(struct EncoderPosition* encoder_position, struct TargetPosit
 	// osMutexRelease(encoder_position->mtx);
 
 	// read target angle
-	osMutexAcquire(target_position->mtx, 0);
+	osMutexAcquire(*(target_position->mtx), portMAX_DELAY);
 	double rotation_angle = target_position->rotation_angle;
-	osMutexRelease(target_position->mtx);
+	osMutexRelease(*(target_position->mtx));
 
 	// determine step direction
 	GPIO_PinState dir = GPIO_PIN_SET;

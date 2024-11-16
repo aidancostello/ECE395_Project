@@ -73,6 +73,7 @@ Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c \
 Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c \
 Core/Src/sysmem.c \
 Core/Src/syscalls.c \
+Core/Src/logging.c\
 Threads/Src/calculate.c \
 Threads/Src/encoder.c \
 Threads/Src/self_gps.c \

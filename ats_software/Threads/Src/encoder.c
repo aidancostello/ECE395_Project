@@ -10,9 +10,9 @@ void encoder_update(struct EncoderPosition* encoder_position) {
 	double rotation_angle = 0;
 
 	// update rotation angle
-	osMutexAcquire(encoder_position->mtx, 0);
+	osMutexAcquire(*(encoder_position->mtx), portMAX_DELAY);
 	encoder_position->rotation_angle = rotation_angle;
-	osMutexRelease(encoder_position->mtx);
+	osMutexRelease(*(encoder_position->mtx));
 
 	return;
 }

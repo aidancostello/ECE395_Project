@@ -20,11 +20,11 @@ void target_gps_update(osMessageQueueId_t* uart_queue, struct GpsData* gps_data)
 	}
 
 	// update self gps data
-	osMutexAcquire(gps_data->mtx, 0);
+	osMutexAcquire(*(gps_data->mtx), portMAX_DELAY);
 	gps_data->target_lat = temp.target_lat / SCALAR;
 	gps_data->target_lon = temp.target_lon / SCALAR;
 	gps_data->target_alt = temp.target_alt / SCALAR;
-	osMutexRelease(gps_data->mtx);
+	osMutexRelease(*(gps_data->mtx));
 
 	return;
 }

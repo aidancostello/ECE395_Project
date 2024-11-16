@@ -10,12 +10,12 @@ struct TargetGpsDataRaw {
 };
 
 struct GpsData {
-	float self_lat;
-	float self_lon;
-	float self_alt;
-	float target_lat;
-	float target_lon;
-	float target_alt;
+	double self_lat;
+	double self_lon;
+	double self_alt;
+	double target_lat;
+	double target_lon;
+	double target_alt;
 	osMutexId_t* mtx;
 };
 

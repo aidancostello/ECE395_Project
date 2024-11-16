@@ -13,9 +13,9 @@ void servo_init(TIM_HandleTypeDef* timer_handle) {
 
 void servo_update(TIM_HandleTypeDef* timer_handle, struct TargetPosition* target_position) {
 	// read target angle
-	osMutexAcquire(target_position->mtx, 0);
+	osMutexAcquire(*(target_position->mtx), portMAX_DELAY);
 	double elevation_angle = target_position->elevation_angle;
-	osMutexRelease(target_position->mtx);
+	osMutexRelease(*(target_position->mtx));
 
 	write_angle(timer_handle, elevation_angle);
 
