@@ -5,38 +5,42 @@ static UART_HandleTypeDef* m_uart_handle = NULL;
 static osMutexId_t* m_uart_mtx = NULL;
 
 // helper function for logging doubles
-static uint8_t double_to_string(double val, uint8_t precision, char* buf);
+static uint16_t double_to_string(double val, uint8_t precision, char* buf);
 
 void log_init(UART_HandleTypeDef* uart_handle, osMutexId_t* uart_mtx) {
     m_uart_handle = uart_handle;
     m_uart_mtx = uart_mtx;
 }
 
-HAL_StatusTypeDef log_transmit_buf(char* buf, size_t len) {
+HAL_StatusTypeDef log_transmit_buf(uint8_t* buf, uint16_t len) {
     if (m_uart_handle == NULL || m_uart_mtx == NULL) { return HAL_ERROR; }
 
     osMutexAcquire(*m_uart_mtx, MUTEX_TIMEOUT);
-    HAL_StatusTypeDef status = HAL_UART_Transmit(m_uart_handle, (uint8_t*)buf, len, UART_TIMEOUT);
+    HAL_StatusTypeDef status = HAL_UART_Transmit(m_uart_handle, buf, len, UART_TIMEOUT);
     osMutexRelease(*m_uart_mtx);
 
     return status;
 }
 
-HAL_StatusTypeDef log_transmit_double(double val, uint8_t precision, char append) {
+HAL_StatusTypeDef log_print(const char* str) {
+    uint16_t null_idx = 0;
+    while (str[null_idx] != '\0') {
+        null_idx++;
+    }
+
+    return log_transmit_buf((uint8_t*)str, null_idx);
+}
+
+HAL_StatusTypeDef log_print_double(double val, uint8_t precision) {
     if (m_uart_handle == NULL || m_uart_mtx == NULL) { return HAL_ERROR; }
 
     char buf[DOUBLE_BUF_SIZE];
-    uint8_t buf_len = double_to_string(val, precision, buf);
+    uint16_t buf_len = double_to_string(val, precision, buf);
 
-    if (append != 0) {
-        buf[buf_len] = append;
-        buf_len++;
-    }
-
-    return log_transmit_buf(buf, (size_t)buf_len);
+    return log_transmit_buf((uint8_t*)buf, (uint16_t)buf_len);
 }
 
-static uint8_t double_to_string(double val, uint8_t precision, char* buf) {
+static uint16_t double_to_string(double val, uint8_t precision, char* buf) {
     int start_idx = 0;
 
     // check negative
@@ -89,5 +93,5 @@ static uint8_t double_to_string(double val, uint8_t precision, char* buf) {
         curr_idx++;
     }
 
-    return curr_idx;
+    return (uint16_t)curr_idx;
 }

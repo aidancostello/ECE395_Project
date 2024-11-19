@@ -627,7 +627,7 @@ void task_entry_SelfGps(void *argument)
   for(;;)
   {
     #ifdef LOG_THREAD_ENTRY
-    log_transmit_buf("task 1\n", 7);
+    log_print("task 1\n");
     #endif
 
     self_gps_update(&hi2c1, ((struct DataPointers*)argument)->gps_data);
@@ -652,7 +652,7 @@ void task_entry_TargetGps(void *argument)
   for(;;)
   {
     #ifdef LOG_THREAD_ENTRY
-    log_transmit_buf("task 2\n", 7);
+    log_print("task 2\n");
     #endif
 
     target_gps_update(&targetGpsQueueHandle, ((struct DataPointers*)argument)->gps_data);
@@ -676,7 +676,7 @@ void task_entry_Calculate(void *argument)
   for(;;)
   {
     #ifdef LOG_THREAD_ENTRY
-    log_transmit_buf("task 3\n", 7);
+    log_print("task 3\n");
     #endif
 
     calculate_update(((struct DataPointers*)argument)->gps_data, ((struct DataPointers*)argument)->target_position);
@@ -701,7 +701,7 @@ void task_entry_Encoder(void *argument)
   for(;;)
   {
     #ifdef LOG_THREAD_ENTRY
-    log_transmit_buf("task 4\n", 7);
+    log_print("task 4\n");
     #endif
 
     encoder_update(((struct DataPointers*)argument)->encoder_position);
@@ -726,7 +726,7 @@ void task_entry_Stepper(void *argument)
   for(;;)
   {
     #ifdef LOG_THREAD_ENTRY
-    log_transmit_buf("task 5\n", 7);
+    log_print("task 5\n");
     #endif
 
     stepper_update(((struct DataPointers*)argument)->encoder_position, ((struct DataPointers*)argument)->target_position);
@@ -751,7 +751,7 @@ void task_entry_Servo(void *argument)
   for(;;)
   {
     #ifdef LOG_THREAD_ENTRY
-    log_transmit_buf("task 6\n", 7);
+    log_print("task 6\n");
     #endif
 
     servo_update(&htim2, ((struct DataPointers*)argument)->target_position);

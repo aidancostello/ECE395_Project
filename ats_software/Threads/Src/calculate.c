@@ -42,18 +42,26 @@ void calculate_update(struct GpsData* gps_data, struct TargetPosition* target_po
 
 	#ifdef LOG_CALCULATE
 	if (tick == 10) {
-		log_transmit_buf("Self: ", 6);
-		log_transmit_double(TO_DEGREES(self_lat), 3, ' ');
-		log_transmit_double(TO_DEGREES(self_lon), 3, ' ');
-		log_transmit_double(self_alt, 3, '\n');
-		log_transmit_buf("Target: ", 8);
-		log_transmit_double(TO_DEGREES(target_lat), 3, ' ');
-		log_transmit_double(TO_DEGREES(target_lon), 3, ' ');
-		log_transmit_double(target_alt, 3, '\n');
-		log_transmit_buf("Computed Rotation: ", 19);
-		log_transmit_double(rotation_angle, 3, ' ');
-		log_transmit_buf("Computed Elevation: ", 20);
-		log_transmit_double(elevation_angle, 3, '\n');
+		log_print("Self: ");
+		log_print_double(TO_DEGREES(self_lat), 3);
+		log_print(" ");
+		log_print_double(TO_DEGREES(self_lon), 3);
+		log_print(" ");
+		log_print_double(self_alt, 3);
+		log_print("\n");
+		log_print("Target: ");
+		log_print_double(TO_DEGREES(target_lat), 3);
+		log_print(" ");
+		log_print_double(TO_DEGREES(target_lon), 3);
+		log_print(" ");
+		log_print_double(target_alt, 3);
+		log_print("\n");
+		log_print("Computed Rotation: ");
+		log_print_double(rotation_angle, 3);
+		log_print(" ");
+		log_print("Computed Elevation: ");
+		log_print_double(elevation_angle, 3);
+		log_print("\n");
 		tick = 0;
 	} 
 	else {
