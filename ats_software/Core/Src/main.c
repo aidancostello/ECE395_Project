@@ -24,6 +24,7 @@
 /* USER CODE BEGIN Includes */
 #include "structs.h"
 #include "logging.h"
+#include "log_config.h"
 #include "self_gps.h"
 #include "target_gps.h"
 #include "calculate.h"
@@ -625,8 +626,9 @@ void task_entry_SelfGps(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    // char* msg = "task 1\n";
-    // log_transmit_buf(msg, 7);
+    #ifdef LOG_THREAD_ENTRY
+    log_transmit_buf("task 1\n", 7);
+    #endif
 
     self_gps_update(&hi2c1, ((struct DataPointers*)argument)->gps_data);
 
@@ -649,8 +651,9 @@ void task_entry_TargetGps(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    // char* msg = "task 2\n";
-    // log_transmit_buf(msg, 7);
+    #ifdef LOG_THREAD_ENTRY
+    log_transmit_buf("task 2\n", 7);
+    #endif
 
     target_gps_update(&targetGpsQueueHandle, ((struct DataPointers*)argument)->gps_data);
 
@@ -672,8 +675,9 @@ void task_entry_Calculate(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    // char* msg = "task 3\n";
-    // log_transmit_buf(msg, 7);
+    #ifdef LOG_THREAD_ENTRY
+    log_transmit_buf("task 3\n", 7);
+    #endif
 
     calculate_update(((struct DataPointers*)argument)->gps_data, ((struct DataPointers*)argument)->target_position);
 
@@ -696,8 +700,9 @@ void task_entry_Encoder(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    // char* msg = "task 4\n";
-    // log_transmit_buf(msg, 7);
+    #ifdef LOG_THREAD_ENTRY
+    log_transmit_buf("task 4\n", 7);
+    #endif
 
     encoder_update(((struct DataPointers*)argument)->encoder_position);
 
@@ -720,8 +725,9 @@ void task_entry_Stepper(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    // char* msg = "task 5\n";
-    // log_transmit_buf(msg, 7);
+    #ifdef LOG_THREAD_ENTRY
+    log_transmit_buf("task 5\n", 7);
+    #endif
 
     stepper_update(((struct DataPointers*)argument)->encoder_position, ((struct DataPointers*)argument)->target_position);
 
@@ -744,8 +750,9 @@ void task_entry_Servo(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    // char* msg = "task 6\n";
-    // log_transmit_buf(msg, 7);
+    #ifdef LOG_THREAD_ENTRY
+    log_transmit_buf("task 6\n", 7);
+    #endif
 
     servo_update(&htim2, ((struct DataPointers*)argument)->target_position);
 

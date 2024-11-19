@@ -1,5 +1,9 @@
 #include "calculate.h"
 
+#ifdef LOG_CALCULATE
+static uint8_t tick = 0;
+#endif
+
 void calculate_update(struct GpsData* gps_data, struct TargetPosition* target_position) {
 	// copy out gps data
 	osMutexAcquire(*(gps_data->mtx), portMAX_DELAY);
@@ -35,6 +39,27 @@ void calculate_update(struct GpsData* gps_data, struct TargetPosition* target_po
 	target_position->rotation_angle = rotation_angle;
 	target_position->elevation_angle = elevation_angle;
 	osMutexRelease(*(target_position->mtx));
+
+	#ifdef LOG_CALCULATE
+	if (tick == 10) {
+		log_transmit_buf("Self: ", 6);
+		log_transmit_double(TO_DEGREES(self_lat), 3, ' ');
+		log_transmit_double(TO_DEGREES(self_lon), 3, ' ');
+		log_transmit_double(self_alt, 3, '\n');
+		log_transmit_buf("Target: ", 8);
+		log_transmit_double(TO_DEGREES(target_lat), 3, ' ');
+		log_transmit_double(TO_DEGREES(target_lon), 3, ' ');
+		log_transmit_double(target_alt, 3, '\n');
+		log_transmit_buf("Computed Rotation: ", 19);
+		log_transmit_double(rotation_angle, 3, ' ');
+		log_transmit_buf("Computed Elevation: ", 20);
+		log_transmit_double(elevation_angle, 3, '\n');
+		tick = 0;
+	} 
+	else {
+		tick++;
+	}
+	#endif
 
 	return;
 }

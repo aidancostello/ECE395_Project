@@ -2,6 +2,8 @@
 #define __CALCULATE_H
 
 #include "structs.h"
+#include "logging.h"
+#include "log_config.h"
 #include <math.h>
 
 #define EARTH_RADIUS_M 6378137
