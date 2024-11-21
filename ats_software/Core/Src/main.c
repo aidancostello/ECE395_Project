@@ -622,12 +622,21 @@ void task_entry_SelfGps(void *argument)
 {
   /* USER CODE BEGIN 5 */
   self_gps_init(&hi2c1);
+  uint8_t i = 0;
   /* Infinite loop */
   for(;;)
   {
     #ifdef LOG_THREAD_ENTRY
     log_print("task 1\n");
     #endif
+
+    if (i == 100) {
+      HAL_GPIO_TogglePin(LED2_BANK, LED2_PIN);
+      i = 0;
+    }
+    else {
+      i++;
+    }
 
     self_gps_update(&hi2c1, ((struct DataPointers*)argument)->gps_data);
 
