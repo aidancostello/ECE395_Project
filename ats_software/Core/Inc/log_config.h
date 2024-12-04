@@ -5,4 +5,6 @@
 
 // #define LOG_CALCULATE
 
+// #define LOG_STEPPER
+
 #endif

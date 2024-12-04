@@ -3,17 +3,17 @@
 static double current_angle;
 
 void stepper_init() {
-	// set reset and en high
+	// set reset, en, pwm high
 	HAL_GPIO_WritePin(STEPPER_RESET_BANK, STEPPER_RESET_PIN, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(STEPPER_EN_BANK, STEPPER_EN_PIN, GPIO_PIN_SET);
-	// set stck, dir, modes, decay, pwm low
+	HAL_GPIO_WritePin(STEPPER_PWM_BANK, STEPPER_PWM_PIN, GPIO_PIN_SET);
+	// set decay, stck, dir, modes low
 	HAL_GPIO_WritePin(STEPPER_STCK_BANK, STEPPER_STCK_PIN, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(STEPPER_DIR_BANK, STEPPER_DIR_PIN, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(STEPPER_MODE1_BANK, STEPPER_MODE1_PIN, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(STEPPER_MODE2_BANK, STEPPER_MODE2_PIN, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(STEPPER_MODE3_BANK, STEPPER_MODE3_PIN, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(STEPPER_DECAY_BANK, STEPPER_DECAY_PIN, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(STEPPER_PWM_BANK, STEPPER_PWM_PIN, GPIO_PIN_RESET);
 	current_angle = 0;
 	return;
 }
@@ -59,6 +59,24 @@ void stepper_update(struct EncoderPosition* encoder_position, struct TargetPosit
 		return;
 	}
 
+	#ifdef LOG_STEPPER
+	log_print("Current: ");
+	log_print_double(current_angle, 3);
+	log_print(" | Target: ");
+	log_print_double(rotation_angle, 3);
+	log_print(" | Step Amount: ");
+	log_print_double((double)DEGREES_PER_STEP/divisor, 3);
+	log_print(" | Stepping -> dir: ");
+	log_print_double((double)dir, 0);
+	log_print(" mode1: ");
+	log_print_double((double)(mode_bits&0x1), 0);
+	log_print(" mode2: ");
+	log_print_double((double)((mode_bits&0x2)>>1), 0);
+	log_print(" mode3: ");
+	log_print_double((double)((mode_bits&0x4)>>2), 0);
+	log_print("\n");
+	#endif
+
 	// set direction
 	HAL_GPIO_WritePin(STEPPER_DIR_BANK, STEPPER_DIR_PIN, dir);
 	// set mode pins
@@ -67,7 +85,7 @@ void stepper_update(struct EncoderPosition* encoder_position, struct TargetPosit
 	HAL_GPIO_WritePin(STEPPER_MODE3_BANK, STEPPER_MODE3_PIN, (mode_bits&0x4)>>2);
 	//execute step
 	HAL_GPIO_WritePin(STEPPER_STCK_BANK, STEPPER_STCK_PIN, GPIO_PIN_SET);
-	osDelay(1);
+	HAL_Delay(1);
 	HAL_GPIO_WritePin(STEPPER_STCK_BANK, STEPPER_STCK_PIN, GPIO_PIN_RESET);
 
 	// update current angle
