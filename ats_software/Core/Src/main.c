@@ -316,7 +316,7 @@ int main(void)
   task_CalculateHandle = osThreadNew(task_entry_Calculate, (void*) &data_pointers, &task_Calculate_attributes);
 
   /* creation of task_Encoder */
-  task_EncoderHandle = osThreadNew(task_entry_Encoder, (void*) &data_pointers, &task_Encoder_attributes);
+  // task_EncoderHandle = osThreadNew(task_entry_Encoder, (void*) &data_pointers, &task_Encoder_attributes);
 
   /* creation of task_Stepper */
   task_StepperHandle = osThreadNew(task_entry_Stepper, (void*) &data_pointers, &task_Stepper_attributes);
