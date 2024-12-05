@@ -17,7 +17,7 @@ m = fl.Map()
 m.add_child(fl.LatLngPopup())
 fl.CircleMarker(location=[DEFAULT_LAT, DEFAULT_LON], radius=2, weight=5).add_to(m)
 map = st_folium(m, height=350, width=700)
-altitude = st.slider("Altitude:", 0, 10000, 0)
+altitude = st.slider("Altitude (meters):", 0, ALT_MAX, 0)
 
 # opens serial
 ser = open_serial()

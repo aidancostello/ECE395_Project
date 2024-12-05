@@ -10,5 +10,5 @@ BAUD = 115200
 # scalars
 SERIAL_SCALAR = 10000
 
-# flags
-SERIAL_OPENED = False
+# max values
+ALT_MAX= 100000

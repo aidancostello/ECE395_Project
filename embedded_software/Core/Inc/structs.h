@@ -4,24 +4,24 @@
 #include "cmsis_os.h"
 
 struct TargetGpsDataRaw {
-	int64_t target_lat;
-	int64_t target_lon;
-	int64_t target_alt;
+	int64_t target_lat;		// degrees * SCALAR from target_gps.h
+	int64_t target_lon;		// degrees * SCALAR from target_gps.h
+	int64_t target_alt;		// meters * SCALAR from target_gps.h
 };
 
 struct GpsData {
-	double self_lat;
-	double self_lon;
-	double self_alt;
-	double target_lat;
-	double target_lon;
-	double target_alt;
+	double self_lat;		// degrees
+	double self_lon;		// degrees
+	double self_alt;		// meters
+	double target_lat;		// degrees
+	double target_lon;		// degrees
+	double target_alt;		// meters
 	osMutexId_t* mtx;
 };
 
 struct TargetPosition {
-	double rotation_angle;
-	double elevation_angle;
+	double rotation_angle;	// degrees
+	double elevation_angle;	// degrees
 	osMutexId_t* mtx;
 };
 
