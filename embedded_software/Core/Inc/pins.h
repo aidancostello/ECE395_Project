@@ -1,0 +1,71 @@
+#ifndef __PINS_H
+#define __PINS_H
+
+// ***** LEDS *****
+// LED1
+#define LED1_BANK GPIOC
+#define LED1_PIN GPIO_PIN_13
+// LED2
+#define LED2_BANK GPIOC
+#define LED2_PIN GPIO_PIN_14
+// LED3
+#define LED3_BANK GPIOC
+#define LED3_PIN GPIO_PIN_15
+
+// ***** GPS *****
+// reset
+#define GPS_RESET_BANK GPIOA
+#define GPS_RESET_PIN GPIO_PIN_9
+// interrupt
+#define GPS_INT_BANK GPIOA
+#define GPS_INT_PIN GPIO_PIN_8
+
+// ***** STEPPER *****
+// reset
+#define STEPPER_RESET_BANK GPIOA
+#define STEPPER_RESET_PIN GPIO_PIN_12
+// enable
+#define STEPPER_EN_BANK GPIOA
+#define STEPPER_EN_PIN GPIO_PIN_11
+// step
+#define STEPPER_STCK_BANK GPIOB
+#define STEPPER_STCK_PIN GPIO_PIN_1
+// dir
+#define STEPPER_DIR_BANK GPIOB
+#define STEPPER_DIR_PIN GPIO_PIN_0
+// decay
+#define STEPPER_DECAY_BANK GPIOB
+#define STEPPER_DECAY_PIN GPIO_PIN_2
+// mode1
+#define STEPPER_MODE1_BANK GPIOA
+#define STEPPER_MODE1_PIN GPIO_PIN_7
+// mode2
+#define STEPPER_MODE2_BANK GPIOA
+#define STEPPER_MODE2_PIN GPIO_PIN_6
+// mode3
+#define STEPPER_MODE3_BANK GPIOA
+#define STEPPER_MODE3_PIN GPIO_PIN_5
+// pwm
+#define STEPPER_PWM_BANK GPIOA
+#define STEPPER_PWM_PIN GPIO_PIN_8
+
+// ***** UART *****
+// rts
+#define UART_RTS_BANK GPIOB
+#define UART_RTS_PIN GPIO_PIN_12
+// cts
+#define UART_CTS_BANK GPIOB
+#define UART_CTS_PIN GPIO_PIN_13
+
+// ***** ENCODER ******
+// channel a
+#define ENCODER_CHANNEL_A_BANK GPIOA
+#define ENCODER_CHANNEL_A_PIN GPIO_PIN_3
+// channel b
+#define ENCODER_CHANNEL_B_BANK GPIOA
+#define ENCODER_CHANNEL_B_PIN GPIO_PIN_2
+// index
+#define ENCODER_INDEX_BANK GPIOA
+#define ENCODER_INDEX_PIN GPIO_PIN_4
+
+#endif
