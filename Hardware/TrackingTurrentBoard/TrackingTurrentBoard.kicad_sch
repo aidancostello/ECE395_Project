@@ -5038,7 +5038,7 @@
 		(uuid "15dfe0ea-9f0e-4069-aa30-0690630d4e10")
 	)
 	(junction
-		(at 186.055 58.42)
+		(at 163.83 58.42)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1c1fcd82-a551-44ee-a9b6-4ed7c01032ed")
@@ -5056,6 +5056,12 @@
 		(uuid "2898a2f8-4580-45ce-a467-d83fdca4c9a9")
 	)
 	(junction
+		(at 184.15 68.58)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2a535566-c9b1-46da-bcad-13e60e6dae89")
+	)
+	(junction
 		(at 278.13 195.58)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5068,7 +5074,7 @@
 		(uuid "2ea650f0-99ef-4ccb-b796-2c1c4f31bff1")
 	)
 	(junction
-		(at 186.055 70.485)
+		(at 163.83 70.485)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "35a36568-2ebf-4617-9531-1035827c7014")
@@ -5090,6 +5096,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "3eb77892-104c-433b-b720-40f79d3c301a")
+	)
+	(junction
+		(at 184.15 80.645)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "49ad390d-e21a-4859-913f-3451db2f34c2")
 	)
 	(junction
 		(at 218.44 53.34)
@@ -5234,10 +5246,6 @@
 		(uuid "6f3b338c-a1e9-414b-98ce-1f1dce48e305")
 	)
 	(no_connect
-		(at 233.68 93.98)
-		(uuid "6ffceccd-8756-49af-abb9-b45e867e7f0c")
-	)
-	(no_connect
 		(at 233.68 83.82)
 		(uuid "752744e5-1b99-46ad-8a03-70679ab20d03")
 	)
@@ -5248,10 +5256,6 @@
 	(no_connect
 		(at 233.045 238.76)
 		(uuid "82c9720e-eb12-43be-b1e8-164f04a462d9")
-	)
-	(no_connect
-		(at 233.68 91.44)
-		(uuid "b5e72594-95fa-4732-8b7a-1ab4e39d7fe5")
 	)
 	(no_connect
 		(at 203.2 91.44)
@@ -5280,10 +5284,6 @@
 	(no_connect
 		(at 273.685 236.22)
 		(uuid "e1565083-89d6-43e7-83dd-b67089bfa62b")
-	)
-	(no_connect
-		(at 203.2 68.58)
-		(uuid "e5d9214b-3c34-43f5-8fa8-c6400696021d")
 	)
 	(no_connect
 		(at 203.2 93.98)
@@ -5413,7 +5413,7 @@
 	)
 	(wire
 		(pts
-			(xy 180.34 68.58) (xy 180.34 70.485)
+			(xy 158.115 68.58) (xy 158.115 70.485)
 		)
 		(stroke
 			(width 0)
@@ -5560,6 +5560,16 @@
 			(type default)
 		)
 		(uuid "327c640b-bc90-4b62-b2bf-6c89b657a321")
+	)
+	(wire
+		(pts
+			(xy 178.435 78.74) (xy 178.435 80.645)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "34469e3e-f33c-4df4-85b3-e9b4565b6b9f")
 	)
 	(wire
 		(pts
@@ -5863,6 +5873,16 @@
 	)
 	(wire
 		(pts
+			(xy 184.15 76.2) (xy 184.15 80.645)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "50f37afe-9f9a-426f-bb12-aa7c3e91f89b")
+	)
+	(wire
+		(pts
 			(xy 203.2 111.76) (xy 191.77 111.76)
 		)
 		(stroke
@@ -5953,6 +5973,16 @@
 	)
 	(wire
 		(pts
+			(xy 184.15 80.645) (xy 178.435 80.645)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "678114dc-16f1-49d8-b2ba-376d87f6fc72")
+	)
+	(wire
+		(pts
 			(xy 95.25 31.75) (xy 105.41 31.75)
 		)
 		(stroke
@@ -6003,6 +6033,16 @@
 	)
 	(wire
 		(pts
+			(xy 178.435 68.58) (xy 184.15 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "73c5a9ee-daa4-453c-b3c4-a3633f185c51")
+	)
+	(wire
+		(pts
 			(xy 48.895 36.83) (xy 48.895 38.1)
 		)
 		(stroke
@@ -6033,7 +6073,7 @@
 	)
 	(wire
 		(pts
-			(xy 180.34 58.42) (xy 186.055 58.42)
+			(xy 158.115 58.42) (xy 163.83 58.42)
 		)
 		(stroke
 			(width 0)
@@ -6050,6 +6090,16 @@
 			(type default)
 		)
 		(uuid "793ae5d1-6289-4baa-b5e7-5b5f61101b78")
+	)
+	(wire
+		(pts
+			(xy 233.68 91.44) (xy 250.19 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7e6c1574-a6e7-48c6-8848-b4023e65ce85")
 	)
 	(wire
 		(pts
@@ -6263,7 +6313,7 @@
 	)
 	(wire
 		(pts
-			(xy 186.055 70.485) (xy 180.34 70.485)
+			(xy 163.83 70.485) (xy 158.115 70.485)
 		)
 		(stroke
 			(width 0)
@@ -6403,7 +6453,7 @@
 	)
 	(wire
 		(pts
-			(xy 186.055 58.42) (xy 203.2 58.42)
+			(xy 163.83 58.42) (xy 203.2 58.42)
 		)
 		(stroke
 			(width 0)
@@ -6460,6 +6510,16 @@
 			(type default)
 		)
 		(uuid "b76c591a-dded-4344-9bcb-151dacde7de1")
+	)
+	(wire
+		(pts
+			(xy 184.15 68.58) (xy 203.2 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b7903022-1501-499c-85cb-41f35758b878")
 	)
 	(wire
 		(pts
@@ -6793,6 +6853,16 @@
 	)
 	(wire
 		(pts
+			(xy 233.68 93.98) (xy 250.19 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ea7fecb4-1063-40e4-9556-4deeb870bcb8")
+	)
+	(wire
+		(pts
 			(xy 318.77 113.03) (xy 313.055 113.03)
 		)
 		(stroke
@@ -6873,7 +6943,7 @@
 	)
 	(wire
 		(pts
-			(xy 186.055 66.04) (xy 186.055 70.485)
+			(xy 163.83 66.04) (xy 163.83 70.485)
 		)
 		(stroke
 			(width 0)
@@ -7218,7 +7288,18 @@
 		)
 		(uuid "64917154-b607-434b-b95d-8269ca353440")
 	)
-	(label "FTDI_TX"
+	(label "SWDIO"
+		(at 240.03 93.98 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6570377e-adef-4632-a08d-22e8ec03d2fd")
+	)
+	(label "FTDI_RX"
 		(at 191.77 109.22 0)
 		(fields_autoplaced yes)
 		(effects
@@ -7328,6 +7409,17 @@
 		)
 		(uuid "8dfc917f-f13c-4c21-8a92-4054b8a2604f")
 	)
+	(label "BOOT"
+		(at 196.85 68.58 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8ec49dc3-7c60-4f08-b694-a83e1f63b0ac")
+	)
 	(label "SDA"
 		(at 197.485 101.6 0)
 		(fields_autoplaced yes)
@@ -7338,6 +7430,17 @@
 			(justify left bottom)
 		)
 		(uuid "8f281122-de16-407f-add9-e34544a7c888")
+	)
+	(label "RESET"
+		(at 196.85 58.42 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "94e2ae1f-6b90-4e4a-b981-597296cbbddd")
 	)
 	(label "USB_ESD+"
 		(at 224.155 218.44 0)
@@ -7471,6 +7574,17 @@
 		)
 		(uuid "c688fe72-67b1-432b-958f-f4d8f7775469")
 	)
+	(label "SWCLK"
+		(at 240.03 91.44 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c7e160a4-ad0a-46ed-bf4a-e7e4c2a500ba")
+	)
 	(label "GPS_RST"
 		(at 194.31 106.68 0)
 		(fields_autoplaced yes)
@@ -7537,7 +7651,7 @@
 		)
 		(uuid "d5a46873-e0df-4d18-9a80-f9d175e91170")
 	)
-	(label "FTDI_RX"
+	(label "FTDI_TX"
 		(at 191.77 111.76 0)
 		(fields_autoplaced yes)
 		(effects
@@ -7985,7 +8099,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_MEC_5G")
-		(at 180.34 63.5 90)
+		(at 158.115 63.5 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7993,7 +8107,7 @@
 		(dnp no)
 		(uuid "0be7af2d-f3de-4155-8ea8-2cee230ee1c0")
 		(property "Reference" "SW101"
-			(at 171.45 62.23 90)
+			(at 149.225 62.23 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8002,7 +8116,7 @@
 			)
 		)
 		(property "Value" "SW_MEC_5G"
-			(at 167.005 64.77 90)
+			(at 144.78 64.77 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8012,7 +8126,7 @@
 			)
 		)
 		(property "Footprint" "Button_Switch_SMD:SW_SPST_CK_RS282G05A3"
-			(at 175.26 63.5 0)
+			(at 153.035 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8021,7 +8135,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.apem.com/int/index.php?controller=attachment&id_attachment=488"
-			(at 175.26 63.5 0)
+			(at 153.035 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8030,7 +8144,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 180.34 63.5 0)
+			(at 158.115 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8318,6 +8432,76 @@
 			(project "TrackingTurrentBoard"
 				(path "/646d2382-5207-4eb7-a10d-a00ee180c70e"
 					(reference "#PWR0109")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_MEC_5G")
+		(at 178.435 73.66 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1bad513d-4d92-48b4-b002-d410677fa886")
+		(property "Reference" "SW102"
+			(at 169.545 72.39 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "SW_MEC_5G"
+			(at 165.1 74.93 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Button_Switch_SMD:SW_SPST_CK_RS282G05A3"
+			(at 173.355 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.apem.com/int/index.php?controller=attachment&id_attachment=488"
+			(at 173.355 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 178.435 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c17f6c94-ad05-4d39-acf4-316c2fc03040")
+		)
+		(pin "2"
+			(uuid "2afd20d6-920c-40dd-a815-34f9deb1737a")
+		)
+		(instances
+			(project "TrackingTurrentBoard"
+				(path "/646d2382-5207-4eb7-a10d-a00ee180c70e"
+					(reference "SW102")
 					(unit 1)
 				)
 			)
@@ -9072,7 +9256,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 186.055 62.23 0)
+		(at 163.83 62.23 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9080,7 +9264,7 @@
 		(dnp no)
 		(uuid "48878bb2-7bc6-4500-9bd9-1cbf18ede2f0")
 		(property "Reference" "C101"
-			(at 186.69 60.325 0)
+			(at 164.465 60.325 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9089,7 +9273,7 @@
 			)
 		)
 		(property "Value" "0.1uF"
-			(at 186.69 64.77 0)
+			(at 164.465 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9098,7 +9282,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 187.0202 66.04 0)
+			(at 164.7952 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9107,7 +9291,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 186.055 62.23 0)
+			(at 163.83 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9116,7 +9300,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 186.055 62.23 0)
+			(at 163.83 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9947,7 +10131,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 186.055 70.485 0)
+		(at 163.83 70.485 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9956,7 +10140,7 @@
 		(fields_autoplaced yes)
 		(uuid "74893378-1f91-4d7c-b4b8-64cf79459097")
 		(property "Reference" "#PWR0103"
-			(at 186.055 76.835 0)
+			(at 163.83 76.835 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9965,7 +10149,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 186.055 75.565 0)
+			(at 163.83 75.565 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9973,7 +10157,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 186.055 70.485 0)
+			(at 163.83 70.485 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9982,7 +10166,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 186.055 70.485 0)
+			(at 163.83 70.485 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9991,7 +10175,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 186.055 70.485 0)
+			(at 163.83 70.485 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10710,6 +10894,75 @@
 			(project "TrackingTurrentBoard"
 				(path "/646d2382-5207-4eb7-a10d-a00ee180c70e"
 					(reference "#PWR0125")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 184.15 72.39 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8e220ef1-ec02-4377-ad84-1edfd8701ec6")
+		(property "Reference" "C107"
+			(at 184.785 70.485 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "0.1uF"
+			(at 184.785 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 185.1152 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 184.15 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 184.15 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "54b5210c-a7ff-4c19-92a4-b6049fdd4f05")
+		)
+		(pin "2"
+			(uuid "c263870e-a575-4c66-a613-82f52586a977")
+		)
+		(instances
+			(project "TrackingTurrentBoard"
+				(path "/646d2382-5207-4eb7-a10d-a00ee180c70e"
+					(reference "C107")
 					(unit 1)
 				)
 			)
@@ -11667,6 +11920,142 @@
 			(project "TrackingTurrentBoard"
 				(path "/646d2382-5207-4eb7-a10d-a00ee180c70e"
 					(reference "R110")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x02")
+		(at 255.27 91.44 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b38181e2-b739-430c-b2d5-c08d823f15c8")
+		(property "Reference" "J109"
+			(at 257.81 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Conn_01x02"
+			(at 257.81 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
+			(at 255.27 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 255.27 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 255.27 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "dae055df-4449-4966-b6c0-52138f96463d")
+		)
+		(pin "2"
+			(uuid "d7333b27-ba1a-43bb-9780-05b6d4d4082a")
+		)
+		(instances
+			(project "TrackingTurrentBoard"
+				(path "/646d2382-5207-4eb7-a10d-a00ee180c70e"
+					(reference "J109")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 184.15 80.645 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "badf2449-8ab4-4c1c-a9a9-6eece588eee7")
+		(property "Reference" "#PWR0131"
+			(at 184.15 86.995 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 184.15 85.725 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 184.15 80.645 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 184.15 80.645 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 184.15 80.645 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "545d270f-9d6c-4d96-a359-fd8a70a31a56")
+		)
+		(instances
+			(project "TrackingTurrentBoard"
+				(path "/646d2382-5207-4eb7-a10d-a00ee180c70e"
+					(reference "#PWR0131")
 					(unit 1)
 				)
 			)
